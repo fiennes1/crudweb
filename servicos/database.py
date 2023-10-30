@@ -1,7 +1,9 @@
 import pyodbc as pyodbc
 import streamlit as st
 
-def cnxn():
+
+@st.cache_resource
+def init_connection():
     return pyodbc.connect(
         "DRIVER={ODBC Driver 17 for SQL Server};SERVER="
         + st.secrets["server"]
@@ -13,4 +15,5 @@ def cnxn():
         + st.secrets["password"]
     )
 
-conn = cnxn()
+
+conn = init_connection()
