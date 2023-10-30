@@ -1,4 +1,4 @@
-import pyodbc
+import pyodbc as pyodbc
 
 SERVER = 'DESKTOP-M65EGB4'
 DATABASE = 'crud'

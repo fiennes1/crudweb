@@ -1,23 +1,23 @@
 import servicos.database as db
-import models.Aluno as Aluno
-import pyodbc
+import models.Aluno as estudantes
 
 
-def incluir(Aluno):
+def incluir(estudantes):
     count = db.cursor.execute("""
     INSERT INTO boletim2 (nomealuno, materia, nota1, nota2, media, situacao)
     VALUES (?,?,?,?,?,?)""",
-                              Aluno.nome, Aluno.materia, Aluno.n1, Aluno.n2, Aluno.media, Aluno.situacao).rowcount
+                              estudantes.nome, estudantes.materia, estudantes.n1, estudantes.n2, estudantes.media,
+                              estudantes.situacao).rowcount
     db.cnxn.commit()
 
 
-def alterar(Aluno):
-    cursor = db.cnxn.cursor()
-    params = (Aluno.nome, Aluno.materia, Aluno.n1, Aluno.n2, Aluno.media, Aluno.situacao, Aluno.id)
+def alterar(estudantes):
     count = db.cursor.execute("""
-        UPDATE boletim2 SET nomealuno = ?, materia = ?, nota1 = ?, nota2 = ?, media = ?, situacao = ?
-        WHERE id = ?
-    """, params).rowcount
+    UPDATE boletim2 
+    SET nomealuno = ?, materia = ?, nota1 = ?, nota2 = ?, media = ?, situacao = ?
+    WHERE id = ?""",
+                              estudantes.nome, estudantes.materia, estudantes.n1, estudantes.n2, estudantes.media,
+                              estudantes.situacao, estudantes.id).rowcount
     db.cnxn.commit()
 
 
@@ -26,7 +26,7 @@ def selecionarId(id):
     alunoList = []
 
     for row in db.cursor.fetchall():
-        alunoList.append(Aluno.Aluno(row[0], row[1], row[2], row[3], row[4], row[5], row[6]))
+        alunoList.append(estudantes.Aluno(row[0], row[1], row[2], row[3], row[4], row[5], row[6]))
 
     return alunoList[0]
 
@@ -43,6 +43,6 @@ def selecionarTodos():
     alunoList = []
 
     for row in db.cursor.fetchall():
-        alunoList.append(Aluno.Aluno(row[0], row[1], row[2], row[3], row[4], row[5], row[6]))
+        alunoList.append(estudantes.Aluno(row[0], row[1], row[2], row[3], row[4], row[5], row[6]))
 
     return alunoList
