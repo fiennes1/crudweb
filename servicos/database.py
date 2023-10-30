@@ -17,3 +17,4 @@ def init_connection():
 
 
 conn = init_connection()
+conn.commit()
