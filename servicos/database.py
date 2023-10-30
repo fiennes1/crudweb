@@ -1,20 +1,10 @@
 import pyodbc as pyodbc
-import streamlit as st
 
 
+SERVER = 'DESKTOP-M65EGB4'
+DATABASE = 'crud'
+USERNAME = 'sa'
+PASSWORD = 'admin123'
 
-def init_connection():
-    return pyodbc.connect(
-        "DRIVER={ODBC Driver 17 for SQL Server};SERVER="
-        + st.secrets["server"]
-        + ";DATABASE="
-        + st.secrets["database"]
-        + ";UID="
-        + st.secrets["username"]
-        + ";PWD="
-        + st.secrets["password"]
-    )
-
-
-conn = init_connection()
-conn.commit()
+cnxn = pyodbc.connect('DRIVER={ODBC DRIVER 17 FOR SQL SERVER};SERVER='+SERVER+';DATABASE='+DATABASE+';UID='+USERNAME+';PWD='+PASSWORD)
+cursor = cnxn.cursor()
