@@ -2,7 +2,7 @@ import pyodbc as pyodbc
 import streamlit as st
 
 
-@st.cache_resource
+
 def init_connection():
     return pyodbc.connect(
         "DRIVER={ODBC Driver 17 for SQL Server};SERVER="
